@@ -15,16 +15,16 @@
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 15px}.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px}.stat b{display:block;font:700 20px Poppins,sans-serif}.stat span{font-size:10px;color:var(--muted)}
 .toolbar{display:flex;justify-content:space-between;align-items:center;margin:15px 0 9px}.toolbar h2{font-size:15px;margin:0}.add{border:0;background:var(--ink);color:white;border-radius:12px;padding:9px 12px;font:700 11px inherit;cursor:pointer}
 .events{display:grid;gap:10px}.event{background:#fff;border:1px solid var(--line);border-radius:20px;padding:15px;box-shadow:0 7px 22px #654f7c0b}
-.eventtop{display:flex;justify-content:space-between;gap:10px}.event h3{font-size:14px;margin:0}.meta{font-size:10px;color:var(--muted);margin-top:3px}.edit{border:0;background:var(--lav);color:#7155ad;border-radius:10px;padding:7px 9px;font:700 10px inherit;cursor:pointer}
+.eventtop{display:flex;justify-content:space-between;gap:12px}.event h3{font-size:14px;margin:0}.meta{font-size:10px;color:var(--muted);margin-top:3px}.eventActions{display:flex;align-items:center;gap:6px;flex:0 0 auto}.edit,.danger{border:0;border-radius:10px;padding:7px 10px;font:700 10px inherit;cursor:pointer}.edit{background:var(--lav);color:#7155ad}.danger{background:var(--red);color:#9a5968}.switch{display:inline-flex;align-items:center;cursor:pointer}.switch input{position:absolute;opacity:0;pointer-events:none}.slider{width:34px;height:20px;background:#d9d4dc;border-radius:999px;position:relative;transition:.2s}.slider:before{content:"";position:absolute;width:16px;height:16px;left:2px;top:2px;background:#fff;border-radius:50%;box-shadow:0 1px 4px #0002;transition:.2s}.switch input:checked+.slider{background:#35c759}.switch input:checked+.slider:before{transform:translateX(14px)}
 .dayrows{display:grid;gap:7px;margin-top:12px}.dayrow{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px;padding-top:8px;border-top:1px dashed #eee8f1}.dayname{font:700 12px Poppins,sans-serif}.status{border:0;border-radius:999px;padding:7px 10px;font:700 9px inherit;cursor:pointer}.available{background:var(--green);color:#39834d}.pending{background:var(--yellow);color:#987818}.booked{background:var(--red);color:#9a5968}
 .price{font-size:10px;color:#7258a9;font-weight:700;margin-top:8px}
 .modal{display:none;position:fixed;inset:0;background:#2d273650;align-items:flex-end;justify-content:center;padding:0;z-index:5}.modal.on{display:flex}
 .sheet{width:min(780px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:25px 25px 0 0;padding:19px 17px 28px}.handle{width:42px;height:4px;background:#ded8e2;border-radius:9px;margin:0 auto 15px}
 .sheethead{display:flex;justify-content:space-between;align-items:center}.sheet h2{font-size:18px;margin:0}.close{border:0;background:#f4f0f6;border-radius:50%;width:31px;height:31px;cursor:pointer}
 .section{margin-top:18px}.sectiontitle{font-size:12px;font-weight:800;margin-bottom:8px}.field{margin-bottom:9px}.field label{font-size:9px;color:var(--muted);display:block;margin-bottom:4px}.field input,.field select{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px 11px;font:500 12px inherit;background:white;outline:0}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}.dateinput{display:grid;grid-template-columns:1fr 92px;gap:7px;margin-bottom:7px}.dateinput select{border:1px solid var(--line);border-radius:12px;padding:9px;font:700 10px inherit}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}.dateinput{display:grid;grid-template-columns:1fr 92px 34px;gap:7px;margin-bottom:7px}.dateinput select{border:1px solid var(--line);border-radius:12px;padding:9px;font:700 10px inherit}.removeRow{border:1px solid #f0d9df;background:#fff7f8;color:#a25d6c;border-radius:10px;font-size:16px;cursor:pointer}
 .addline{border:1px dashed #cfc3dc;background:#faf7ff;color:#7659ae;border-radius:12px;padding:9px;width:100%;font:700 10px inherit;cursor:pointer}
-.promo{display:grid;grid-template-columns:70px 1fr;gap:8px;align-items:end;margin-bottom:7px}.preview{background:#f8f4ff;border-radius:15px;padding:11px;margin-top:9px;font-size:11px;line-height:1.8}.preview b{color:#7355b6}.save{width:100%;border:0;background:var(--ink);color:white;border-radius:14px;padding:12px;font:700 12px inherit;margin-top:17px;cursor:pointer}
+.promo{display:grid;grid-template-columns:70px 1fr 34px;gap:8px;align-items:end;margin-bottom:7px}.preview{background:#f8f4ff;border-radius:15px;padding:11px;margin-top:9px;font-size:11px;line-height:1.8}.preview b{color:#7355b6}.save{width:100%;border:0;background:var(--ink);color:white;border-radius:14px;padding:12px;font:700 12px inherit;margin-top:17px;cursor:pointer}.save:disabled{opacity:.55;cursor:wait}.statusMessage{min-height:20px;margin-top:10px;text-align:center;font-size:11px;font-weight:700}.statusMessage.success{color:#39834d}.statusMessage.error{color:#a25d6c}
 .note{font-size:9px;color:var(--muted);margin-top:8px;text-align:center}
 @media(min-width:650px){.events{grid-template-columns:1fr 1fr}.sheet{border-radius:25px;margin-bottom:20px}.modal{align-items:center;padding:20px}}
 </style></head>
@@ -34,6 +34,7 @@
 <section class="hero"><small>RENTAL MANAGEMENT</small><h1>จัดการคิวเช่า 💜</h1><p>เพิ่มคอน อัปเดตสถานะ และตั้งโปรได้จากหน้านี้</p></section>
 <div class="stats"><div class="stat"><b id="av">7</b><span>คิวว่าง</span></div><div class="stat"><b id="pd">1</b><span>รอยืนยัน</span></div><div class="stat"><b id="bk">1</b><span>จองแล้ว</span></div></div>
 <div class="toolbar"><h2>คอนเสิร์ตทั้งหมด</h2><button class="add" onclick="openModal()">＋ เพิ่มคอน</button></div>
+<div class="statusMessage" id="appStatus" role="status" aria-live="polite"></div>
 <section class="events" id="events"></section>
 </main>
 
@@ -46,20 +47,22 @@
 <div class="field"><label>จุดรับ–คืน</label><input id="pickup" value="หน้า BITEC"></div></div>
 
 <div class="section"><div class="sectiontitle">วันที่จัดงาน</div>
-<div id="dateFields"><div class="dateinput"><input type="date" value="2026-10-03"><select><option>AVAILABLE</option><option>PENDING</option><option>BOOKED</option></select></div></div>
+<div id="dateFields"><div class="dateinput"><input type="date" value="2026-10-03"><select><option>AVAILABLE</option><option>PENDING</option><option>BOOKED</option></select><button class="removeRow" type="button" onclick="removeRow(this)" aria-label="ลบวันที่">×</button></div></div>
 <button class="addline" onclick="addDate()">＋ เพิ่มวันที่</button></div>
 
 <div class="section"><div class="sectiontitle">โปรหลายวัน</div>
 <div id="promoFields">
   <div class="promo promoRow">
-    <div class="field"><label>จำนวนวัน</label><input class="promoDays" type="number" min="2" value="2" oninput="preview()"></div>
+    <div class="field"><label>จำนวนวัน</label><input class="promoDays" type="number" min="1" value="1" oninput="preview()"></div>
     <div class="field"><label>ลดจากราคาปกติ (บาท)</label><input class="promoDisc" type="number" min="0" value="80" oninput="preview()"></div>
+    <button class="removeRow" type="button" onclick="removeRow(this)" aria-label="ลบโปรโมชั่น">×</button>
   </div>
 </div>
 <div class="preview" id="preview"></div>
 <button class="addline" type="button" onclick="addPromo()">＋ เพิ่มโปร</button></div>
-<button class="save" onclick="mockSave()">บันทึกคอนเสิร์ต</button>
-<div class="note">Data layer พร้อมเชื่อม Supabase</div>
+<button class="save" id="saveButton" onclick="saveEvent()">บันทึกคอนเสิร์ต</button>
+<div class="statusMessage" id="saveStatus" role="status" aria-live="polite"></div>
+<div class="note">ข้อมูลจะถูกบันทึกลง Supabase ทันที</div>
 </div></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

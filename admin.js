@@ -9,6 +9,8 @@ function showAdmin(session) { $('login').hidden = !!session; $('adminApp').hidde
 function setSaveStatus(message, type = '') {
   ['saveStatus', 'appStatus'].forEach(id => { const node = $(id); if (!node) return; node.textContent = message; node.className = `statusMessage ${type}`; });
 }
+function showResultModal(title, message, type = 'success') { $('resultModal').className = `resultModal on ${type}`; $('resultIcon').textContent = type === 'success' ? '✓' : '!'; $('resultTitle').textContent = title; $('resultText').textContent = message; }
+function closeResultModal() { $('resultModal').classList.remove('on'); }
 
 async function loadAdminData() {
   try {
@@ -61,8 +63,8 @@ async function saveEvent() {
     else { const { data: inserted, error } = await client.from('events').insert(eventPayload).select('id').single(); if (error) throw error; eventId = inserted.id; }
     const { error: datesError } = await client.from('event_dates').insert(dates.map(x => ({ ...x, event_id: eventId }))); if (datesError) throw datesError;
     if (promotions.length) { const { error: promoError } = await client.from('promotions').insert(promotions.map(x => ({ ...x, event_id: eventId }))); if (promoError) throw promoError; }
-    closeModal(); await loadAdminData(); setSaveStatus('บันทึกอีเวนท์สำเร็จ', 'success');
-  } catch (error) { setSaveStatus(`บันทึกไม่สำเร็จ: ${supabaseError(error)}`, 'error'); } finally { button.disabled = false; }
+    closeModal(); await loadAdminData(); setSaveStatus('', ''); showResultModal('บันทึกอีเวนท์สำเร็จ', 'ข้อมูลอีเวนท์ถูกบันทึกลง Supabase เรียบร้อยแล้ว', 'success');
+  } catch (error) { const message = supabaseError(error); setSaveStatus(`บันทึกไม่สำเร็จ: ${message}`, 'error'); showResultModal('บันทึกไม่สำเร็จ', message, 'error'); } finally { button.disabled = false; }
 }
 async function toggleActive(id) { const e = data.find(x => x.id === id); const { error } = await requireSupabase().from('events').update({ is_active: !e.is_active }).eq('id', id); if (error) return alert(supabaseError(error)); loadAdminData(); }
 async function deleteEvent(id) { if (!confirm('ลบคอนเสิร์ตนี้และข้อมูลวันที่/โปรโมชั่นทั้งหมดหรือไม่?')) return; const { error } = await requireSupabase().from('events').delete().eq('id', id); if (error) return alert(supabaseError(error)); loadAdminData(); }

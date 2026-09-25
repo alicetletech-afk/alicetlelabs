@@ -19,6 +19,7 @@
 .dayrows{display:grid;gap:7px;margin-top:12px}.dayrow{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px;padding-top:8px;border-top:1px dashed #eee8f1}.dayname{font:700 12px Poppins,sans-serif}.status{border:0;border-radius:999px;padding:7px 10px;font:700 9px inherit;cursor:pointer}.available{background:var(--green);color:#39834d}.pending{background:var(--yellow);color:#987818}.booked{background:var(--red);color:#9a5968}
 .price{font-size:10px;color:#7258a9;font-weight:700;margin-top:8px}
 .modal{display:none;position:fixed;inset:0;background:#2d273650;align-items:flex-end;justify-content:center;padding:0;z-index:5}.modal.on{display:flex}
+.resultModal{display:none;position:fixed;inset:0;background:#2d273680;align-items:center;justify-content:center;padding:20px;z-index:10}.resultModal.on{display:flex}.resultCard{width:min(360px,100%);background:#fff;border-radius:25px;padding:28px 22px 22px;text-align:center;box-shadow:0 18px 55px #392e4b38;animation:popIn .2s ease-out}.resultIcon{width:58px;height:58px;margin:0 auto 13px;border-radius:50%;display:grid;place-items:center;font-size:28px;font-weight:800}.resultModal.success .resultIcon{background:var(--green);color:#35a653}.resultModal.error .resultIcon{background:var(--red);color:#b35e70}.resultCard h2{font-size:19px;margin:0 0 6px}.resultCard p{font-size:12px;line-height:1.6;color:var(--muted);margin:0;white-space:pre-line}.resultClose{width:100%;border:0;background:var(--ink);color:#fff;border-radius:14px;padding:12px;margin-top:19px;font:700 12px inherit;cursor:pointer}@keyframes popIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
 .sheet{width:min(780px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:25px 25px 0 0;padding:19px 17px 28px}.handle{width:42px;height:4px;background:#ded8e2;border-radius:9px;margin:0 auto 15px}
 .sheethead{display:flex;justify-content:space-between;align-items:center}.sheet h2{font-size:18px;margin:0}.close{border:0;background:#f4f0f6;border-radius:50%;width:31px;height:31px;cursor:pointer}
 .section{margin-top:18px}.sectiontitle{font-size:12px;font-weight:800;margin-bottom:8px}.field{margin-bottom:9px}.field label{font-size:9px;color:var(--muted);display:block;margin-bottom:4px}.field input,.field select{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px 11px;font:500 12px inherit;background:white;outline:0}
@@ -64,6 +65,8 @@
 <div class="statusMessage" id="saveStatus" role="status" aria-live="polite"></div>
 <div class="note">ข้อมูลจะถูกบันทึกลง Supabase ทันที</div>
 </div></div>
+
+<div class="resultModal" id="resultModal"><div class="resultCard"><div class="resultIcon" id="resultIcon">✓</div><h2 id="resultTitle"></h2><p id="resultText"></p><button class="resultClose" onclick="closeResultModal()">เรียบร้อย</button></div></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>

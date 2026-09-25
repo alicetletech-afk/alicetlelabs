@@ -37,13 +37,13 @@
 /* Final polish: keep the admin shell stable while the controls breathe on mobile. */
 .app{width:min(100%,780px);max-width:780px}
 .adminTools{display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap}
-.adminLink,.logoutBtn{display:inline-flex;align-items:center;justify-content:center;width:92px;min-height:32px;border:1px solid var(--line);border-radius:11px;padding:7px 11px;font:800 10px inherit;text-decoration:none;cursor:pointer;white-space:nowrap}
+.adminLink,.logoutBtn{display:inline-flex;align-items:center;justify-content:center;flex:0 0 116px;width:116px;height:42px;border:1px solid var(--line);border-radius:13px;padding:0 11px;font-family:"Noto Sans Thai",sans-serif;font-size:12px;font-weight:800;line-height:1;text-decoration:none;cursor:pointer;white-space:nowrap;box-sizing:border-box}
 .adminLink{background:#fff;color:#7659aa}.logoutBtn{background:#f8f2ff;color:#7659aa}.adminLink:hover,.logoutBtn:hover{background:var(--lav);border-color:#d9c9f2}
-.adminTag{display:inline-flex;align-items:center;min-height:28px;color:#625c68}
+.adminTag{display:inline-flex;align-items:center;justify-content:center;min-width:74px;height:36px;color:#625c68;font-family:"Noto Sans Thai",sans-serif;font-size:11px;font-weight:800;line-height:1}
 .earlyBirdBox{align-items:center}.earlyBirdToggle{align-items:center;min-height:38px}.earlyBirdToggle input{width:18px;height:18px;margin:0;accent-color:#9270df}
 .jobTop .statusPill{min-width:58px;text-align:center;padding:7px 9px;letter-spacing:.2px}
 .adminView{width:100%}.jobCard,.dashCard,.posCard{min-width:0}
-@media(max-width:650px){.brand{align-items:flex-start}.adminTools{gap:5px}.adminLink,.logoutBtn{padding:7px 9px}.earlyBirdBox{grid-template-columns:1fr;padding:12px}.earlyBirdPrice{margin:0}.jobTop{align-items:flex-start}.jobTop .statusPill{min-width:54px}}
+@media(max-width:650px){.brand{align-items:flex-start}.adminTools{gap:5px}.adminLink,.logoutBtn{flex-basis:104px;width:104px;height:38px;font-size:11px}.adminTag{min-width:66px;height:32px;font-size:10px}.earlyBirdBox{grid-template-columns:1fr;padding:12px}.earlyBirdPrice{margin:0}.jobTop{align-items:flex-start}.jobTop .statusPill{min-width:54px}}
 </style></head>
 <body><section class="login" id="login"><h1>เข้าสู่หลังบ้าน 💜</h1><p>สำหรับทีม AlicetleLabs เท่านั้น</p><input id="loginEmail" type="email" placeholder="อีเมล" autocomplete="username"><input id="loginPassword" type="password" placeholder="รหัสผ่าน" autocomplete="current-password"><div class="error" id="loginError"></div><button id="loginButton">เข้าสู่ระบบ</button></section>
 <main class="app" id="adminApp" hidden>

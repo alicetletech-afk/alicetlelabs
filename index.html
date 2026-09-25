@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AlicetleLabs — เช็กคิว</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&family=Poppins:wght@500;600;700&display=swap');
+:root{--ink:#29252f;--muted:#89818e;--purple:#9270df;--lav:#f1eaff;--line:#ebe4f0;--green:#e7f8ec;--yellow:#fff4cf;--red:#f7ecef}
+*{box-sizing:border-box}body{margin:0;background:#fcfaff;color:var(--ink);font-family:"Noto Sans Thai",sans-serif}
+.app{max-width:680px;margin:auto;min-height:100vh;padding:22px 17px 70px;background:linear-gradient(#f2ecff 0,#fff 235px)}
+.brand{font:700 20px Poppins,sans-serif}.brand b{color:var(--purple)}
+.hero{padding:28px 3px 17px}.hero small{font:700 11px Poppins,sans-serif;letter-spacing:.8px;color:#795eb4}.hero h1{font-size:31px;line-height:1.2;margin:6px 0}.hero p{font-size:13px;color:var(--muted);margin:0}
+.search{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px 14px;display:flex;gap:8px;box-shadow:0 7px 24px #6b548410}
+.search input{border:0;outline:0;background:none;width:100%;font:inherit}.tabs{display:flex;gap:7px;overflow-x:auto;overflow-y:hidden;padding:12px 0 16px;width:100%;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}
+.tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 13px;font:700 11px inherit;white-space:nowrap;cursor:pointer}.tab.on{background:var(--ink);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:minmax(154px,auto);gap:11px;align-items:stretch;min-height:319px;width:100%}.card{border:1px solid var(--line);background:#fff;border-radius:20px;padding:16px;box-shadow:0 8px 24px #654f7c0c;cursor:pointer;min-width:0;min-height:154px;height:100%;display:flex;flex-direction:column}.card .arrow{margin-top:auto;padding-top:11px}
+.row{display:flex;justify-content:space-between;gap:10px;min-width:0}.row>div:first-child{min-width:0;flex:1}.title{font-weight:800;font-size:15px;overflow-wrap:anywhere}.tag{font:700 9px Poppins,sans-serif;background:var(--lav);color:#7155ad;border-radius:99px;padding:5px 8px;height:max-content}
+.venue{color:var(--muted);font-size:11px;margin-top:3px}.dates{display:flex;gap:6px;flex-wrap:wrap;margin-top:13px}
+.pill{font-size:10px;font-weight:700;border-radius:10px;padding:7px 9px;background:var(--green)}.pill.pend{background:var(--yellow);color:#967719}.pill.un{background:var(--red);color:#a27a83}.arrow{text-align:right;margin-top:11px;color:#7759b6;font-size:11px;font-weight:700}
+.list{width:100%;min-width:0;overflow-x:hidden}.list.off{display:none}.detail{display:none}.detail.on{display:block}.back{border:0;background:none;padding:0;color:#7459aa;font:700 12px inherit;margin-bottom:15px;cursor:pointer}
+.eventHead{background:#fff;border:1px solid var(--line);border-radius:22px;padding:19px;margin-bottom:13px}.eventHead h2{font-size:20px;margin:4px 0}.eventHead p{font-size:12px;color:var(--muted);margin:0}
+.label{font-weight:800;font-size:13px;margin:18px 2px 9px}.daygrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.day{border:1.5px solid var(--line);background:#fff;border-radius:16px;padding:13px 5px;text-align:center;cursor:pointer}.day strong{display:block;font:700 16px Poppins,sans-serif}.day span{font-size:10px;color:#6f6974}.day.selected{border-color:var(--purple);background:var(--lav);box-shadow:inset 0 0 0 1px var(--purple)}
+.day.disabled{background:#f7f4f6;color:#aaa;cursor:not-allowed}.day.pending{background:#fff9e8;color:#9b7b24;cursor:not-allowed}
+.summary{margin-top:13px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:17px}.summaryTop{display:flex;justify-content:space-between;gap:12px;align-items:flex-end}.summary small{color:var(--muted);font-size:10px}.total{font:700 25px Poppins,sans-serif;color:#7455ba}.save{font-size:10px;background:#eee6ff;color:#7354b2;border-radius:99px;padding:5px 8px;font-weight:800;display:none}
+.pkg{margin-top:9px;font-size:11px;color:#6f5b99;font-weight:700}.info{font-size:11px;color:var(--muted);margin-top:10px;line-height:1.6}
+.linebtn{display:block;width:100%;border:0;border-radius:15px;background:var(--ink);color:#fff;padding:14px;margin-top:13px;font:700 13px inherit;text-align:center;text-decoration:none;cursor:pointer}.linebtn.disabled{opacity:.35;pointer-events:none}
+.notice{margin-top:9px;background:#faf7ff;border-radius:12px;padding:10px 11px;font-size:10px;line-height:1.55;color:#756d7b}
+.legend{text-align:center;color:var(--muted);font-size:10px;margin-top:22px}
+@media(max-width:359px){.grid{grid-template-columns:1fr}}
+
+.selectedBlock{min-width:0;flex:1}
+.priceBlock{text-align:right;flex:0 0 auto;min-width:150px}
+.priceLabel{display:block}
+.priceLine{display:flex;align-items:center;justify-content:flex-end;gap:8px;min-height:32px}
+.priceLine .save{margin:0;white-space:nowrap;line-height:1.2}
+</style></head>
+<body><main class="app">
+<div class="brand">alicetle<b>Labs</b> ♡</div>
+<section class="hero"><small>CONCERT PHONE RENTAL</small><h1>ไปคอนไหนกัน? 🎧💜</h1><p>เช็กคิว Samsung Galaxy S26 Ultra แล้วเลือกวันที่ต้องการได้เลย</p></section>
+
+<section class="list" id="list">
+<div class="search">⌕ <input id="q" placeholder="ค้นหาศิลปิน หรือชื่อคอนเสิร์ต…"></div>
+<div class="tabs"><button class="tab on" data-f="all">ทั้งหมด ♡</button><button class="tab" data-f="kpop">K-POP</button><button class="tab" data-f="tpop">T-POP</button><button class="tab" data-f="other">อื่นๆ</button></div>
+<div class="grid" id="grid"></div>
+<div class="legend">🟢 ว่าง &nbsp; 🟡 รอยืนยัน &nbsp; 🤍 จองแล้ว</div>
+</section>
+
+<section class="detail" id="detail">
+<button class="back" id="back">← กลับไปเลือกคอน</button>
+<div class="eventHead"><span class="tag" id="dtag"></span><h2 id="dname"></h2><p id="dvenue"></p></div>
+<div class="label">เลือกวันที่ต้องการเช่า ♡</div><div class="daygrid" id="days"></div>
+<div class="summary">
+ <div class="summaryTop"><div class="selectedBlock"><small>วันที่เลือก</small><div id="selectedText" style="font-weight:800">ยังไม่ได้เลือก</div></div><div class="priceBlock"><small class="priceLabel">ราคา</small><div class="priceLine"><span class="save" id="save"></span><div class="total" id="total">—</div></div></div></div>
+ <div class="pkg" id="pkg">เลือกวันที่เพื่อดูราคา</div>
+ <div class="info" id="pickup"></div>
+ <a class="linebtn disabled" id="linebtn" target="_blank">ติดต่อทาง LINE เพื่อจองคิว 💬</a>
+ <div class="notice">♡ การเลือกวันที่บนเว็บไซต์ยังไม่ถือเป็นการจอง คิวจะถูกกันไว้หลังจากติดต่อร้านและร้านยืนยันการจองแล้วค่ะ</div>
+</div></section>
+</main>
+<script>
+const LINE_URL='https://lin.ee/5E5Cibq';
+const events=[
+{id:1,cat:'tpop',tag:'T-POP',name:'PERSES “UNCENSORED”',venue:'BITEC LIVE',pickup:'รับ–คืนหน้า BITEC',base:890,discounts:{},dates:[{d:'3 OCT',status:'available'}]},
+{id:2,cat:'tpop',tag:'T-POP',name:'OH MY FOURTH CONCERT',venue:'BITEC LIVE',pickup:'รับ–คืนหน้า BITEC',base:890,discounts:{2:80,3:270},dates:[{d:'16 OCT',status:'booked'},{d:'17 OCT',status:'available'},{d:'18 OCT',status:'available'}]},
+{id:3,cat:'kpop',tag:'K-POP',name:'NCT 127 THE REDLINE',venue:'Bangkok',pickup:'รับ–คืน BTS Siam / Mo Chit',base:1290,discounts:{2:180},dates:[{d:'31 OCT',status:'available'},{d:'1 NOV',status:'available'}]},
+{id:4,cat:'kpop',tag:'K-POP',name:'BTS WORLD TOUR ARIRANG',venue:'Rajamangala National Stadium',pickup:'รับ–คืน BTS Siam / Mo Chit',base:1290,discounts:{},dates:[{d:'3 DEC',status:'available'},{d:'5 DEC',status:'pending'},{d:'6 DEC',status:'available'}]}
+];
+let filter='all',current=null,selected=[];
+const $=id=>document.getElementById(id), grid=$('grid'), q=$('q');
+function badge(x){return x.status==='available'?`<span class="pill">${x.d} ✓</span>`:x.status==='pending'?`<span class="pill pend">${x.d} HOLD</span>`:`<span class="pill un">${x.d} UN</span>`}
+function render(){const s=q.value.toLowerCase();const a=events.filter(e=>(filter==='all'||e.cat===filter)&&(e.name+' '+e.venue).toLowerCase().includes(s));grid.innerHTML=a.map(e=>`<div class="card" onclick="openEvent(${e.id})"><div class="row"><div><div class="title">${e.name}</div><div class="venue">⌖ ${e.venue}</div></div><span class="tag">${e.tag}</span></div><div class="dates">${e.dates.map(badge).join('')}</div><div class="arrow">เช็กคิว →</div></div>`).join('')}
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');filter=b.dataset.f;render()});q.oninput=render;
+window.openEvent=id=>{current=events.find(e=>e.id===id);selected=[];$('list').classList.add('off');$('detail').classList.add('on');$('dtag').textContent=current.tag;$('dname').textContent=current.name;$('dvenue').textContent='⌖ '+current.venue;$('pickup').textContent='📍 '+current.pickup;
+$('days').innerHTML=current.dates.map((x,i)=>{const dis=x.status!=='available';return `<button class="day ${x.status==='pending'?'pending':dis?'disabled':''}" ${dis?'disabled':`onclick="toggleDay(${i},this)"`}><strong>${x.d.split(' ')[0]}</strong><span>${x.d.split(' ').slice(1).join(' ')} · ${x.status==='available'?'ว่าง':x.status==='pending'?'รอยืนยัน':'จองแล้ว'}</span></button>`}).join('');update()}
+window.toggleDay=(i,el)=>{const p=selected.indexOf(i);p>=0?selected.splice(p,1):selected.push(i);el.classList.toggle('selected');update()}
+function update(){const n=selected.length, disc=current?Number(current.discounts[n]||0):0;if(!n){$('selectedText').textContent='ยังไม่ได้เลือก';$('total').textContent='—';$('pkg').textContent='เลือกวันที่เพื่อดูราคา';$('save').style.display='none';$('linebtn').classList.add('disabled');$('linebtn').removeAttribute('href');return}
+selected.sort((a,b)=>a-b);const total=current.base*n-disc;$('selectedText').textContent=selected.map(i=>current.dates[i].d).join(' + ');$('total').textContent='฿'+total.toLocaleString();$('pkg').textContent=n===1?`1 วัน · ฿${total.toLocaleString()}`:`${n} วัน · ฿${total.toLocaleString()}${disc?' (ราคาโปร)':''}`;
+if(disc){$('save').textContent=`ประหยัด ฿${disc}`;$('save').style.display='inline-block'}else $('save').style.display='none';
+const msg=`สนใจเช่า Samsung Galaxy S26 Ultra 💜\nงาน: ${current.name}\nวันที่: ${selected.map(i=>current.dates[i].d).join(' + ')}\nราคา: ${total.toLocaleString()} บาท`;
+$('linebtn').href=LINE_URL+'?text='+encodeURIComponent(msg);$('linebtn').classList.remove('disabled')}
+$('back').onclick=()=>{$('detail').classList.remove('on');$('list').classList.remove('off')};render();
+</script></body></html>

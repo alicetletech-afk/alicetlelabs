@@ -86,7 +86,21 @@ $('linebtn').onclick = event => {
   const lineUrl = `https://line.me/R/oaMessage/${encodeURIComponent(LINE_ACCOUNT_ID)}/?${encodeURIComponent(message)}`;
   $('linebtn').href = lineUrl;
   event.preventDefault();
-  window.location.assign(lineUrl);
+  const request = {
+    event_id: current.id,
+    date_ids: selected.map(i => current.dates[i].id),
+    selected_dates: selected.map(i => current.dates[i].rawDate),
+    start_date: current.dates[selected[0]].rawDate,
+    end_date: current.dates[selected[selected.length - 1]].rawDate,
+    pickup_location: current.pickup,
+    return_location: current.pickup,
+    rental_total: quote.total,
+    message
+  };
+  requireSupabase().from('booking_requests').insert(request).then(({ error }) => {
+    if (error) console.warn('[AlicetleLabs] booking request was not saved', error);
+    window.location.assign(lineUrl);
+  });
 };
 
 loadEvents();

@@ -12,7 +12,7 @@ function formatDate(value) {
 function transformEvent(row) {
   return {
     id: row.id, cat: row.category, tag: row.tag, name: row.name, venue: row.venue,
-    pickup: row.pickup, base: Number(row.base_price),
+    pickup: row.pickup, base: Number(row.base_price), earlyBirdActive: Boolean(row.early_bird_active), earlyBirdPrice: row.early_bird_price == null ? null : Number(row.early_bird_price),
     discounts: Object.fromEntries((row.promotions || []).map(p => [p.days, Number(p.discount_amount)])),
     dates: (row.event_dates || []).sort((a, b) => a.event_date.localeCompare(b.event_date)).map(d => ({
       id: d.id, rawDate: d.event_date, d: formatDate(d.event_date), status: d.status
@@ -23,7 +23,7 @@ function transformEvent(row) {
 async function loadEvents() {
   try {
     const client = requireSupabase();
-    const { data, error } = await client.from('events').select('id,name,category,tag,venue,pickup,base_price,event_dates(id,event_date,status),promotions(id,days,discount_amount)').eq('is_active', true).order('name');
+    const { data, error } = await client.from('events').select('id,name,category,tag,venue,pickup,base_price,early_bird_active,early_bird_price,event_dates(id,event_date,status),promotions(id,days,discount_amount)').eq('is_active', true).order('name');
     if (error) throw error;
     events = (data || []).map(transformEvent).sort((a, b) => (a.dates[0]?.rawDate || '').localeCompare(b.dates[0]?.rawDate || ''));
     render();
@@ -58,10 +58,14 @@ function update() {
   const n = selected.length, disc = current ? Number(current.discounts[n] || 0) : 0;
   if (!n) { $('selectedText').textContent = 'ยังไม่ได้เลือก'; $('total').textContent = '—'; $('pkg').textContent = 'เลือกวันที่เพื่อดูราคา'; $('save').style.display = 'none'; $('linebtn').classList.add('disabled'); $('linebtn').removeAttribute('href'); return; }
   selected.sort((a, b) => a - b);
-  const total = current.base * n - disc;
+  const dailyPrice = current.earlyBirdActive && current.earlyBirdPrice != null ? Math.min(current.base, current.earlyBirdPrice) : current.base;
+  const earlyBirdSaving = current.earlyBirdActive ? (current.base - dailyPrice) * n : 0;
+  const total = dailyPrice * n - disc;
+  const saved = earlyBirdSaving + disc;
   $('selectedText').textContent = selected.map(i => current.dates[i].d).join(' + '); $('total').textContent = '฿' + total.toLocaleString();
-  $('pkg').textContent = n === 1 ? `1 วัน · ฿${total.toLocaleString()}` : `${n} วัน · ฿${total.toLocaleString()}${disc ? ' (ราคาโปร)' : ''}`;
-  if (disc) { $('save').textContent = `ประหยัด ฿${disc}`; $('save').style.display = 'inline-block'; } else $('save').style.display = 'none';
+  const regular = current.base * n;
+  $('pkg').innerHTML = `${current.earlyBirdActive ? '<b>EARLY BIRD</b> · ' : ''}${n} วัน · ${saved ? `<s>฿${regular.toLocaleString()}</s> → ` : ''}฿${total.toLocaleString()}${disc ? ' (ราคาโปร)' : ''}`;
+  if (saved) { $('save').textContent = `ประหยัด ฿${saved.toLocaleString()}`; $('save').style.display = 'inline-block'; } else $('save').style.display = 'none';
   const msg = `สนใจเช่า Samsung Galaxy S26 Ultra 💜\nงาน: ${current.name}\nวันที่: ${selected.map(i => current.dates[i].d).join(' + ')}\nราคา: ${total.toLocaleString()} บาท`;
   $('linebtn').href = LINE_URL + '?text=' + encodeURIComponent(msg); $('linebtn').classList.remove('disabled');
 }

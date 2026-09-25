@@ -5,7 +5,14 @@ const $ = id => document.getElementById(id);
 function iso(value) { return value ? value.slice(0, 10) : ''; }
 function displayDate(value) { return new Date(`${value}T00:00:00`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }).toUpperCase(); }
 function statusClass(s) { return s === 'AVAILABLE' ? 'available' : s === 'PENDING' ? 'pending' : 'booked'; }
-function showAdmin(session) { $('login').hidden = !!session; $('adminApp').hidden = !session; if (session) loadAdminData(); }
+function showAdmin(session) {
+  $('login').hidden = !!session;
+  $('adminApp').hidden = !session;
+  if (session) {
+    loadAdminData();
+    if (typeof loadBusinessData === 'function') loadBusinessData();
+  }
+}
 function setSaveStatus(message, type = '') {
   ['saveStatus', 'appStatus'].forEach(id => { const node = $(id); if (!node) return; node.textContent = message; node.className = `statusMessage ${type}`; });
 }

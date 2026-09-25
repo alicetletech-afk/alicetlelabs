@@ -33,6 +33,13 @@ async function loadEvents() {
 }
 
 function badge(x) { return x.status === 'available' ? `<span class="pill">${x.d} ✓</span>` : x.status === 'pending' ? `<span class="pill pend">${x.d} HOLD</span>` : `<span class="pill un">${x.d} UN</span>`; }
+function calculateQuote() {
+  const days = selected.length;
+  const multiDayDiscount = current ? Number(current.discounts[days] || 0) : 0;
+  const dailyPrice = current?.earlyBirdActive && current.earlyBirdPrice != null ? Math.min(current.base, current.earlyBirdPrice) : current?.base || 0;
+  const total = dailyPrice * days - multiDayDiscount;
+  return { days, multiDayDiscount, total, selectedDates: selected.map(i => current.dates[i].d).join(' + ') };
+}
 function render() {
   const s = q.value.toLowerCase();
   const a = events.filter(e => (filter === 'all' || e.cat === filter) && (e.name + ' ' + e.venue).toLowerCase().includes(s));
@@ -55,21 +62,27 @@ window.openEvent = id => {
 };
 window.toggleDay = (i, el) => { const p = selected.indexOf(i); p >= 0 ? selected.splice(p, 1) : selected.push(i); el.classList.toggle('selected'); update(); };
 function update() {
-  const n = selected.length, disc = current ? Number(current.discounts[n] || 0) : 0;
+  const quote = calculateQuote(), n = quote.days, disc = quote.multiDayDiscount;
   if (!n) { $('selectedText').textContent = 'ยังไม่ได้เลือก'; $('total').textContent = '—'; $('pkg').textContent = 'เลือกวันที่เพื่อดูราคา'; $('save').style.display = 'none'; $('linebtn').classList.add('disabled'); $('linebtn').removeAttribute('href'); return; }
   selected.sort((a, b) => a - b);
   const dailyPrice = current.earlyBirdActive && current.earlyBirdPrice != null ? Math.min(current.base, current.earlyBirdPrice) : current.base;
   const earlyBirdSaving = current.earlyBirdActive ? (current.base - dailyPrice) * n : 0;
-  const total = dailyPrice * n - disc;
+  const total = quote.total;
   const saved = earlyBirdSaving + disc;
   $('selectedText').textContent = selected.map(i => current.dates[i].d).join(' + '); $('total').textContent = '฿' + total.toLocaleString();
   const regular = current.base * n;
   $('pkg').innerHTML = `${current.earlyBirdActive ? '<b>EARLY BIRD</b> · ' : ''}${n} วัน · ${saved ? `<s>฿${regular.toLocaleString()}</s> → ` : ''}฿${total.toLocaleString()}${disc ? ' (ราคาโปร)' : ''}`;
   if (saved) { $('save').textContent = `ประหยัด ฿${saved.toLocaleString()}`; $('save').style.display = 'inline-block'; } else $('save').style.display = 'none';
-  const msg = `สนใจเช่า Samsung Galaxy S26 Ultra 💜\nงาน: ${current.name}\nวันที่: ${selected.map(i => current.dates[i].d).join(' + ')}\nราคา: ${total.toLocaleString()} บาท`;
-  $('linebtn').href = LINE_URL + '?text=' + encodeURIComponent(msg); $('linebtn').classList.remove('disabled');
+  $('linebtn').classList.remove('disabled');
 }
 $('back').onclick = () => { $('detail').classList.remove('on'); $('list').classList.remove('off'); };
+$('linebtn').onclick = event => {
+  if (!current || !selected.length) { event.preventDefault(); $('linebtn').classList.add('disabled'); return; }
+  selected.sort((a, b) => a - b);
+  const quote = calculateQuote();
+  const message = `✨ สนใจเช่า Samsung Galaxy S26 Ultra 💜\nงาน: ${current.name}\nวันที่: ${quote.selectedDates}\nจำนวน: ${quote.days} วัน\nราคา: ${quote.total.toLocaleString()} บาท\nรับ–คืน: ${current.pickup}\n\n⭐️ รบกวนเช็กคิวและแจ้งรายละเอียดการจอง⭐️ `;
+  $('linebtn').href = `${LINE_URL}?text=${encodeURIComponent(message)}`;
+};
 
 loadEvents();
 if (SUPABASE_READY) {

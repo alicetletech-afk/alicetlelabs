@@ -1,5 +1,7 @@
 // AlicetleLabs Customer — Supabase-backed data layer
-const LINE_URL = 'https://lin.ee/zEPQXVT';
+// The short URL resolves to this AlicetleLabs official account. LINE's
+// oaMessage scheme is required for reliable prefilled text on mobile.
+const LINE_ACCOUNT_ID = '@106mcbfi';
 let events = [];
 let filter = 'all', current = null, selected = [];
 const $ = id => document.getElementById(id), grid = $('grid'), q = $('q');
@@ -81,7 +83,10 @@ $('linebtn').onclick = event => {
   selected.sort((a, b) => a - b);
   const quote = calculateQuote();
   const message = `✨ สนใจเช่า Samsung Galaxy S26 Ultra 💜\nงาน: ${current.name}\nวันที่: ${quote.selectedDates}\nจำนวน: ${quote.days} วัน\nราคา: ${quote.total.toLocaleString()} บาท\nรับ–คืน: ${current.pickup}\n\n⭐️ รบกวนเช็กคิวและแจ้งรายละเอียดการจอง⭐️ `;
-  $('linebtn').href = `${LINE_URL}?text=${encodeURIComponent(message)}`;
+  const lineUrl = `https://line.me/R/oaMessage/${encodeURIComponent(LINE_ACCOUNT_ID)}/?${encodeURIComponent(message)}`;
+  $('linebtn').href = lineUrl;
+  event.preventDefault();
+  window.location.assign(lineUrl);
 };
 
 loadEvents();

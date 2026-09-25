@@ -35,6 +35,13 @@
 .priceLabel{display:block}
 .priceLine{display:flex;align-items:center;justify-content:flex-end;gap:8px;min-height:32px}
 .priceLine .save{margin:0;white-space:nowrap;line-height:1.2}
+</style>
+<style>
+.lineCta{margin-top:14px;padding:16px 17px;background:#fcfaff;border:1px solid var(--line);border-radius:18px;box-shadow:0 6px 20px #6b548408}
+.lineCta h3{margin:0;font-size:14px;line-height:1.35}.lineCta p{margin:4px 0 11px;color:var(--muted);font-size:11px;line-height:1.55}
+.lineCtaButton{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:9px 15px;border-radius:12px;background:#06c755;color:#fff;font:800 11px "Noto Sans Thai",sans-serif;text-decoration:none;transition:transform .15s ease,filter .15s ease}.lineCtaButton:hover{filter:brightness(.96);transform:translateY(-1px)}
+.lineCtaHelper{margin-top:11px;padding:13px 14px;background:#faf7ff;border:1px solid #eee6f7;border-radius:14px}.lineCtaHelper h3{font-size:12px}.lineCtaHelper p{margin-bottom:9px;font-size:10px}.lineCtaHelper .lineCtaButton{min-height:34px;padding:8px 13px;font-size:10px}
+@media(max-width:600px){.lineCta{padding:15px}.lineCtaButton{width:100%}}
 </style></head>
 <body><main class="app">
 <div class="brand">alicetle<b>Labs</b> ♡</div>
@@ -44,6 +51,7 @@
 <div class="search">⌕ <input id="q" placeholder="ค้นหาศิลปิน หรือชื่อคอนเสิร์ต…"></div>
 <div class="tabs"><button class="tab on" data-f="all">ทั้งหมด ♡</button><button class="tab" data-f="kpop">K-POP</button><button class="tab" data-f="tpop">T-POP</button><button class="tab" data-f="other">อื่นๆ</button></div>
 <div class="grid" id="grid"></div>
+<section class="lineCta" aria-label="สอบถามเพิ่มเติม"><h3>ไม่เจอคอนที่กำลังหาอยู่? ♡</h3><p>อยากเช็กคิวคอนอื่น หรือมีคำถามเพิ่มเติม ทักเราได้เลย</p><a class="lineCtaButton" href="https://lin.ee/TchrFFy" target="_blank" rel="noopener noreferrer">สอบถามผ่าน LINE</a></section>
 </section>
 
 <section class="detail" id="detail">
@@ -54,6 +62,7 @@
  <div class="pkg" id="pkg">เลือกวันที่เพื่อดูราคา</div>
  <div class="info" id="pickup"></div>
  <a class="linebtn disabled" id="linebtn" target="_blank">ติดต่อทาง LINE เพื่อจองคิว 💬</a>
+ <div class="lineCta lineCtaHelper"><h3>เปิด LINE ไม่ได้? ♡</h3><p>หากใช้งานผ่านคอมพิวเตอร์ หรือกดแล้วไม่เข้า LINE<br>สามารถแอด LINE เพื่อจองคิวได้ที่นี่</p><a class="lineCtaButton" href="https://lin.ee/TchrFFy" target="_blank" rel="noopener noreferrer">แอด LINE เพื่อจองคิว →</a></div>
  <div class="notice">♡ การเลือกวันที่บนเว็บไซต์ยังไม่ถือเป็นการจอง คิวจะถูกกันไว้หลังจากติดต่อร้านและร้านยืนยันการจองแล้วค่ะ</div>
 </div>
 <button class="back" id="back">← กลับไปเลือกคอนเสิร์ต</button>

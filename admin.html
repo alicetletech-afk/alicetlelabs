@@ -9,6 +9,7 @@
 :root{--ink:#29252f;--muted:#877f8d;--purple:#9270df;--lav:#f1eaff;--line:#ebe4f0;--green:#e8f8ed;--yellow:#fff5d6;--red:#faecef;--bg:#fbf9fd}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Thai",sans-serif}
 .app{max-width:780px;margin:auto;min-height:100vh;padding:20px 16px 70px;background:linear-gradient(#f1ebff 0,#fff 230px)}
+.login{max-width:390px;margin:12vh auto;padding:24px 18px;background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:0 12px 32px #654f7c14}.login h1{font-size:22px;margin:0 0 4px}.login p{font-size:12px;color:var(--muted);margin:0 0 18px}.login input{width:100%;border:1px solid var(--line);border-radius:12px;padding:11px;font:inherit;margin-bottom:9px}.login button{width:100%;border:0;background:var(--ink);color:#fff;border-radius:13px;padding:12px;font:700 12px inherit;cursor:pointer}.login .error{color:#a64e62;font-size:11px;margin:8px 0;min-height:16px}
 .brand{display:flex;justify-content:space-between;align-items:center}.logo{font:700 20px Poppins,sans-serif}.logo b{color:var(--purple)}.adminTag{font-size:10px;font-weight:800;background:white;border:1px solid var(--line);padding:6px 9px;border-radius:999px}
 .hero{padding:27px 2px 15px}.hero small{font:700 10px Poppins,sans-serif;color:#785db2;letter-spacing:.7px}.hero h1{margin:5px 0 3px;font-size:28px}.hero p{margin:0;color:var(--muted);font-size:12px}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 15px}.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px}.stat b{display:block;font:700 20px Poppins,sans-serif}.stat span{font-size:10px;color:var(--muted)}
@@ -27,8 +28,9 @@
 .note{font-size:9px;color:var(--muted);margin-top:8px;text-align:center}
 @media(min-width:650px){.events{grid-template-columns:1fr 1fr}.sheet{border-radius:25px;margin-bottom:20px}.modal{align-items:center;padding:20px}}
 </style></head>
-<body><main class="app">
-<div class="brand"><div class="logo">alicetle<b>Labs</b> ♡</div><span class="adminTag">ADMIN</span></div>
+<body><section class="login" id="login"><h1>เข้าสู่หลังบ้าน 💜</h1><p>สำหรับทีม AlicetleLabs เท่านั้น</p><input id="loginEmail" type="email" placeholder="อีเมล" autocomplete="username"><input id="loginPassword" type="password" placeholder="รหัสผ่าน" autocomplete="current-password"><div class="error" id="loginError"></div><button id="loginButton">เข้าสู่ระบบ</button></section>
+<main class="app" id="adminApp" hidden>
+<div class="brand"><div class="logo">alicetle<b>Labs</b> ♡</div><span><span class="adminTag">ADMIN</span> <button class="edit" id="logout">ออกจากระบบ</button></span></div>
 <section class="hero"><small>RENTAL MANAGEMENT</small><h1>จัดการคิวเช่า 💜</h1><p>เพิ่มคอน อัปเดตสถานะ และตั้งโปรได้จากหน้านี้</p></section>
 <div class="stats"><div class="stat"><b id="av">7</b><span>คิวว่าง</span></div><div class="stat"><b id="pd">1</b><span>รอยืนยัน</span></div><div class="stat"><b id="bk">1</b><span>จองแล้ว</span></div></div>
 <div class="toolbar"><h2>คอนเสิร์ตทั้งหมด</h2><button class="add" onclick="openModal()">＋ เพิ่มคอน</button></div>
@@ -60,4 +62,7 @@
 <div class="note">Data layer พร้อมเชื่อม Supabase</div>
 </div></div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script src="supabase-client.js"></script>
 <script src="admin.js"></script></body></html>

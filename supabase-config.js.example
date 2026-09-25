@@ -1,0 +1,6 @@
+// Copy this file to supabase-config.js and fill in the public/publishable key
+// from Supabase Dashboard > Project Settings > API Keys.
+window.SUPABASE_CONFIG = {
+  url: 'https://aqfhxoujmsjzutfatlcq.supabase.co',
+  publishableKey: 'sb_publishable_REPLACE_ME'
+};

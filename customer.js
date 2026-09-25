@@ -1,5 +1,5 @@
 // AlicetleLabs Customer — data layer ready for Supabase
-const LINE_URL='https://lin.ee/5E5Cibq';
+const LINE_URL='https://lin.ee/zEPQXVT';
 
 const MOCK_EVENTS=[
  {id:1,cat:'tpop',tag:'T-POP',name:'PERSES “UNCENSORED”',venue:'BITEC LIVE',pickup:'รับ–คืนหน้า BITEC',base:890,discounts:{},dates:[{d:'3 OCT',status:'available'}]},

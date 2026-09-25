@@ -37,7 +37,7 @@
 /* Final polish: keep the admin shell stable while the controls breathe on mobile. */
 .app{width:min(100%,780px);max-width:780px}
 .adminTools{display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap}
-.adminLink,.logoutBtn{display:inline-flex;align-items:center;justify-content:center;min-height:32px;border:1px solid var(--line);border-radius:11px;padding:7px 11px;font:800 10px inherit;text-decoration:none;cursor:pointer;white-space:nowrap}
+.adminLink,.logoutBtn{display:inline-flex;align-items:center;justify-content:center;width:92px;min-height:32px;border:1px solid var(--line);border-radius:11px;padding:7px 11px;font:800 10px inherit;text-decoration:none;cursor:pointer;white-space:nowrap}
 .adminLink{background:#fff;color:#7659aa}.logoutBtn{background:#f8f2ff;color:#7659aa}.adminLink:hover,.logoutBtn:hover{background:var(--lav);border-color:#d9c9f2}
 .adminTag{display:inline-flex;align-items:center;min-height:28px;color:#625c68}
 .earlyBirdBox{align-items:center}.earlyBirdToggle{align-items:center;min-height:38px}.earlyBirdToggle input{width:18px;height:18px;margin:0;accent-color:#9270df}
@@ -47,7 +47,7 @@
 </style></head>
 <body><section class="login" id="login"><h1>เข้าสู่หลังบ้าน 💜</h1><p>สำหรับทีม AlicetleLabs เท่านั้น</p><input id="loginEmail" type="email" placeholder="อีเมล" autocomplete="username"><input id="loginPassword" type="password" placeholder="รหัสผ่าน" autocomplete="current-password"><div class="error" id="loginError"></div><button id="loginButton">เข้าสู่ระบบ</button></section>
 <main class="app" id="adminApp" hidden>
-<div class="brand"><div class="logo">alicetle<b>Labs</b> ♡</div><div class="adminTools"><a class="adminLink" href="calendar.html">ปฏิทิน</a><span class="adminTag">ADMIN</span><button class="logoutBtn" id="logout">ออกจากระบบ</button></div></div>
+<div class="brand"><div class="logo">alicetle<b>Labs</b> ♡</div><div class="adminTools"><span class="adminTag">ADMIN</span><button class="logoutBtn" id="logout">ออกจากระบบ</button><a class="adminLink" href="calendar.html">ปฏิทิน</a></div></div>
 <section class="hero"><small>RENTAL MANAGEMENT</small><h1>จัดการคิวเช่า 💜</h1><p>เพิ่มคอน อัปเดตสถานะ และตั้งโปรได้จากหน้านี้</p></section>
 <nav class="adminNav" aria-label="Admin modules"><button class="on" data-view="dashboardView">ภาพรวม ♡</button><button data-view="rentalView">Rental</button><button data-view="jobsView">Jobs</button><button data-view="posView">POS · เงิน</button></nav>
 <section class="adminView on" id="dashboardView">
